@@ -10,8 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_17_001456) do
-  create_table "gamers", force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2024_11_17_012958) do
+  create_table "gamerprofiles", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
     t.string "favorite_genere"
@@ -21,4 +21,31 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_17_001456) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "gamers", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.string "favorite_genere"
+    t.string "username"
+    t.string "password"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.index ["email"], name: "index_gamers_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_gamers_on_reset_password_token", unique: true
+  end
+
+  create_table "libraries", force: :cascade do |t|
+    t.string "game_name"
+    t.string "game_desc"
+    t.integer "gamer_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["gamer_id"], name: "index_libraries_on_gamer_id"
+  end
+
+  add_foreign_key "libraries", "gamers"
 end

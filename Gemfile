@@ -65,3 +65,6 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+# Adding Devise to gemfile for User authencation
+gem "devise"
