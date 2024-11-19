@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @game_profile %>
+
+<div>
+  <%= link_to "Edit this game profile", edit_game_profile_path(@game_profile) %> |
+  <%= link_to "Back to game profiles", game_profiles_path %>
+
+  <%= button_to "Destroy this game profile", @game_profile, method: :delete %>
+</div>

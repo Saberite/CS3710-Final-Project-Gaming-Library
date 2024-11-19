@@ -1,4 +1,6 @@
 class Gamerprofile < ApplicationRecord
-    #One to one relationship. Library belongs to Gamer
-    belongs_to:gamer
+    
+    
+    #Validations
+    validates :first_name, :last_name, :favorite_genere, :username, :password, presence: true 
 end
