@@ -6,9 +6,9 @@
   <% @gamerprofiles.each do |gamerprofile| %>
     <%= render gamerprofile %>
     <p>
-      <%= link_to "Show this gamerprofile", gamerprofile %>
+      <%= link_to "Show this gamerprofile", gamerprofile_path(gamerprofile) %>
     </p>
   <% end %>
 </div>
 
-<%= link_to "New gamerprofile", new_gamerprofile_path %>
+ <%= link_to "New gamerprofile", new_gamerprofile_registration_path %> 

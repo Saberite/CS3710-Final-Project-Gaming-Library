@@ -1,17 +1,17 @@
 Rails.application.routes.draw do
-  devise_for :gamerprofiles, controllers: {
+  # Devise routes for Gamerprofile
+  devise_for :gamerprofiles, controllers: { 
     registrations: 'gamerprofiles/registrations',
     sessions: 'gamerprofiles/sessions',
-    passwords: 'gamerprofiles/passswords'
+    passwords: 'gamerprofiles/passwords'
   }
 
-  resources :gamerprofiles
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+  # Standard RESTful routes for Gamerprofiles
+  resources :gamerprofiles, only: [:index, :show]
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Health check route
   get "up" => "rails/health#show", as: :rails_health_check
 
-  # Defines the root path route ("/")
+  # Root route
   root "gamerprofiles#index"
 end
