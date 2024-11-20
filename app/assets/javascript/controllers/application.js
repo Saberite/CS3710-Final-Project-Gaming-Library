@@ -1,3 +1,5 @@
+// app/assets/javascripts/applications.js
+
 import { Application } from "@hotwired/stimulus"
 
 const application = Application.start()

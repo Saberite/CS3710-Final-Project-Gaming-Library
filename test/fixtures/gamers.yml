@@ -5,11 +5,9 @@ one:
   last_name: MyString
   favorite_genere: MyString
   username: MyString
-  password: MyString
 
 two:
   first_name: MyString
   last_name: MyString
   favorite_genere: MyString
   username: MyString
-  password: MyString
