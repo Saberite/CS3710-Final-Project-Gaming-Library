@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :gamers
+  devise_for :gamerprofiles, controllers: {
+    registrations: 'gamerprofiles/registrations',
+    sessions: 'gamerprofiles/sessions',
+    passwords: 'gamerprofiles/passswords'
+  }
+
   resources :gamerprofiles
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
