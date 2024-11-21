@@ -19,4 +19,11 @@
     <%= gamer.username %>
   </p>
 
+  <% if @gamer.library %>
+  <p><strong>Game Names:</strong> <%= @gamer.library.game_name %></p>
+  <p><strong>Game Descriptions:</strong> <%= @gamer.library.game_desc %></p>
+<% else %>
+  <p>No game information available.</p>
+<% end %>
+
 </div>

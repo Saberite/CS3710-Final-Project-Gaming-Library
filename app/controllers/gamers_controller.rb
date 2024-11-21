@@ -64,7 +64,8 @@ class GamersController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
+    # Include the one to one relationship
     def gamer_params
-      params.require(:gamer).permit(:first_name, :last_name, :favorite_genere, :username)
+      params.require(:gamer).permit(:first_name, :last_name, :favorite_genere, :username, library_attributes: [:id, :game_name, :game_desc])
     end
 end

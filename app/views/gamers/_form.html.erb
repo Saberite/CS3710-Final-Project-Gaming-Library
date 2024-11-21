@@ -31,7 +31,23 @@
     <%= form.text_field :username %>
   </div>
 
+<h2>Edit Library Info </h2>
+
+  <%= form.fields_for :library do |library_form| %>
+    <div>
+     <%= library_form.label :game_name %>
+     <%= library_form.text_field :game_name %>
+    </div>
+
+    <div>
+     <%= library_form.label :game_desc %>
+     <%= library_form.text_field :game_desc %>
+    </div>
+  <% end %>
+
+    
+
   <div>
-    <%= form.submit %>
+    <%= form.submit "Update/Create" %>
   </div>
 <% end %>
