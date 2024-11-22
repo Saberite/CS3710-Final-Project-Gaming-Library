@@ -8,3 +8,13 @@
   <%= link_to "Show this gamer", @gamer %> |
   <%= link_to "Back to gamers", gamers_path %>
 </div>
+
+<div>
+  <%= link_to "New entry", new_gamer_library_path(@gamer) %> |
+  <% if @gamer.library.present? %>
+    <%= link_to "Edit", edit_gamer_library_path(@gamer) %> |
+    <%= link_to "Show", gamer_library_path(@gamer) %>
+  <% else %>
+    <span>No library available to edit or show.</span>
+  <% end %>
+</div>

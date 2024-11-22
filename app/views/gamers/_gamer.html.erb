@@ -19,11 +19,15 @@
     <%= gamer.username %>
   </p>
 
-  <% if @gamer.library %>
-  <p><strong>Game Names:</strong> <%= @gamer.library.game_name %></p>
-  <p><strong>Game Descriptions:</strong> <%= @gamer.library.game_desc %></p>
-<% else %>
-  <p>No game information available.</p>
-<% end %>
+  
+  <h2>Your Library Info </h2>
+  <% if gamer_signed_in? %>
+    <% if @gamer.library %>
+    <p><strong>Game Names:</strong> <%= @gamer.library.game_name %></p>
+    <p><strong>Game Descriptions:</strong> <%= @gamer.library.game_desc %></p>
+  <% else %>
+    <p>No game information available.</p>
+  <% end %>
+  <% end %>
 
 </div>

@@ -12,7 +12,7 @@ Rails.application.routes.draw do
 
   resources :gamers do
     #Nested libraries under gamer
-    resource :libraries
+    resource :libraries, only: [:new, :edit, :show, :index]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

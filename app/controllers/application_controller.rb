@@ -14,5 +14,13 @@ class ApplicationController < ActionController::Base
        devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :favorite_genere, :username])
    end
  
+
+     #override after_sign_in_path_for method that is called by Devise
+     def after_sign_in_path_for(resource)
+        # Redirect to the gamer's profile using devise method current_gamer
+        gamer_path(current_gamer) # Redirect to the logged-in student's profile
+    end
+
+    
  end
  
