@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+ devise_for :gamers, controllers: {
+ registrations: 'gamers/registrations',
+ sessions: 'gamers/sessions',
+ passwords: 'gamers/passwords'
+}
+
+  
+  #devise_for :gamers
   #resources :libraries
   #resources :gamers
 

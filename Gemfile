@@ -72,6 +72,9 @@ gem "bootstrap"
 #Required for Bootstrap
 gem "sassc-rails"
 
+#User Authentication Devise
+gem "devise"
+
 #Rspec install:
 group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
@@ -84,5 +87,6 @@ group :development, :test do
     gem 'factory_bot_rails'
   end 
   
- 
+
+
 end
