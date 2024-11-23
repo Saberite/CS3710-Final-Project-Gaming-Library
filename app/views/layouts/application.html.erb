@@ -21,7 +21,7 @@
 
 <!-- Banner at the top -->
    <div class="banner">
-     <p>Welcome to the MSU Denver Testing Server Banner! Important information will be here!</p>
+     <p>Welcome to the Testing Server Banner! Important information will be here!</p>
    </div>
 
 <!-- Banner Styling -->
@@ -35,21 +35,22 @@
  }
   </style>
  
-  <!-- Sign up/in/out button -->
+
+
+ <!-- Header Added with 'jumbotron' -->
+ <!-- Header with background color green from # and text coloring with "color" -->
+ <div class="jumbotron" style="background-color: #4CAF50; color: white;">
+  <h1>Testing Server</h1>
+  <p>Testing Words!</p>
+</div>
+
+<!-- Sign up/in/out button -->
   <% if gamer_signed_in? %>
   <%= button_to "Sign Out", destroy_gamer_session_path, method: :destroy %>
 <% else %>
   <%= link_to 'Sign In', new_gamer_session_path %>
   <%= link_to 'Sign Up', new_gamer_registration_path %>
 <% end %>
-
-
- <!-- Header Added with 'jumbotron' -->
- <!-- Header with background color green from # and text coloring with "color" -->
- <div class="jumbotron" style="background-color: #4CAF50; color: white;">
-  <h1>MSU Denver Testing Server</h1>
-  <p>Testing Words!</p>
-</div>
 
  <body>
 <!--Test Dropdown  -->
@@ -60,7 +61,7 @@
      <ul class="dropdown-menu">
        <li><a class="dropdown-item" href="https://www.msudenver.edu/">MSU Home Page</a></li>
        <li><a class="dropdown-item" href="https://www.msudenver.edu/studenthub/">MSU Student Hub</a></li>
-       <li><a class="dropdown-item" href="students#new">New Student?</a></li>
+       <li><a class="dropdown-item" href="gamers#new">New Student?</a></li>
      </ul>
    </div>
    <%= yield %>

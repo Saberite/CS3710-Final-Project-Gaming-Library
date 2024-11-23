@@ -10,9 +10,11 @@ Rails.application.routes.draw do
   #resources :libraries
   #resources :gamers
 
-  resources :gamers do
-    #Nested libraries under gamer
-    resource :libraries, only: [:new, :edit, :show, :index]
+  # Adding "only ..." increases the routes. Needed for add/edit/deleting
+  resources :gamers, only: [:index, :show, :edit, :update, :destroy] do
+    # Nested libraries under gamer.
+    # Expanded routes with "only..."
+    resource :libraries, only: [:new, :edit, :show, :index, :destory]
   end
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
