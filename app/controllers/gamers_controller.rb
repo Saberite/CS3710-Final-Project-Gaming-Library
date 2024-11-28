@@ -3,7 +3,36 @@ class GamersController < ApplicationController
 
   # GET /gamers or /gamers.json
   def index
-    @gamers = Gamer.all
+    #@gamers = Gamer.all
+
+    @search_params = params[:search] || {}
+    
+    #Intialize Students to be empty before search
+    @gamers = Gamer.none
+
+    #If search is present, hide all
+    if params[:search].present?
+      
+      #When search is made, show student index according to filter
+      @gamers = Gamer.all
+
+
+      #Major Search, tied to _search_form.html
+      if @search_params[:username].present?
+        @gamers = @gamers.where(major: @search_params[:username])
+      end
+
+      
+    
+
+    end #End of hide all
+
+    # In the case that there is no search, send this message
+    
+    if @gamers.empty?
+      @gamers_message = "Please enter search criteria to find students" 
+    end
+
   end
 
   # GET /gamers/1 or /gamers/1.json

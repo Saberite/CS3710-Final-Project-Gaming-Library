@@ -45,12 +45,13 @@
 </div>
 
 <!-- Sign up/in/out button -->
-  <% if gamer_signed_in? %>
-  <%= button_to "Sign Out", destroy_gamer_session_path, method: :destroy %>
+<% if gamer_signed_in? %>
+  <%= button_to "Sign Out", destroy_gamer_session_path, method: :delete, class: "btn btn-danger" %>
 <% else %>
-  <%= link_to 'Sign In', new_gamer_session_path %>
-  <%= link_to 'Sign Up', new_gamer_registration_path %>
+  <%= link_to 'Sign In', new_gamer_session_path, class: "btn btn-primary" %>
+  <%= link_to 'Sign Up', new_gamer_registration_path, class: "btn btn-success" %>
 <% end %>
+
 
  <body>
 <!--Test Dropdown  -->
