@@ -3,23 +3,28 @@ class GamersController < ApplicationController
 
   # GET /gamers or /gamers.json
   def index
-    #@gamers = Gamer.all
+    @gamers = Gamer.all
 
     @search_params = params[:search] || {}
     
     #Intialize Students to be empty before search
-    @gamers = Gamer.none
+    #@gamers = Gamer.none
 
     #If search is present, hide all
     if params[:search].present?
       
-      #When search is made, show student index according to filter
+      #When search is made, show gamer index according to filter
       @gamers = Gamer.all
 
 
-      #Major Search, tied to _search_form.html
-      if @search_params[:username].present?
-        @gamers = @gamers.where(major: @search_params[:username])
+     
+      # Search for games using API service
+      if @search_params[:game_search].present?
+        #@games = IGDBService.new.search_games(@search_params[:game_search])
+        @games = search_games_via_igdb(@search_params[:game_search])
+
+        Rails.logger.debug("Games data: #{@games.inspect}")
+
       end
 
       
@@ -30,8 +35,9 @@ class GamersController < ApplicationController
     # In the case that there is no search, send this message
     
     if @gamers.empty?
-      @gamers_message = "Please enter search criteria to find students" 
+      @gamers_message = "Please enter search criteria gamer or games" 
     end
+    
 
   end
 
@@ -86,10 +92,22 @@ class GamersController < ApplicationController
     end
   end
 
+  
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_gamer
       @gamer = Gamer.find(params[:id])
+    end
+
+    # Used for searching games
+    def search_games_via_igdb(query)
+      igdb_service = IGDBService.new
+      games = igdb_service.search_games(query)
+
+    rescue StandardError => e
+      Rails.logger.error("IGDB API error: #{e.message}")
+      @gamers_message = "Unable to fetch game data from IGDB at the moment."
+      []
     end
 
     # Only allow a list of trusted parameters through.

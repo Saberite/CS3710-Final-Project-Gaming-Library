@@ -1,0 +1,10 @@
+<%= form_with(url: gamers_path, method: :get, local: true, class: "form-inline", id: "search-form") do |form| %>
+  
+  <%= form.label :game_search, "Search IGDB Games" %>
+  <%= form.text_field :game_search, value: @search_params[:game_search], class: "form-control" %>
+  
+  <div>
+    <%= form.submit "Search", class: "btn btn-primary" %>
+  </div>
+
+<% end %>

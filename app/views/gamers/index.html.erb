@@ -1,5 +1,8 @@
 <p style="color: green"><%= notice %></p>
 
+<!-- Render the Search Form -->
+<%= render 'search_form' %>
+
 <h1>Gamers</h1>
 
 <div id="gamers">
@@ -12,3 +15,19 @@
 </div>
 
 
+<h2>IGDB Games</h2>
+<% if @games.present? %>
+  <h2>Games found:</h2>
+  <ul>
+    <% @games.each do |game| %>
+      <li>
+        <strong><%= game["name"] %></strong><br>
+        <%= game["summary"] %><br>
+        <strong>Genres:</strong> <%= game["genres"].join(", ") %><br>
+        <strong>Platforms:</strong> <%= game["platforms"].join(", ") %><br>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p><%= @games_message || "No games found for your search." %></p>
+<% end %>

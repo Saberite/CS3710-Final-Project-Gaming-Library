@@ -75,6 +75,12 @@ gem "sassc-rails"
 #User Authentication Devise
 gem "devise"
 
+#Api gem needed for IGDB usage
+gem "ruby-apicalypse"
+
+#Adding https gem to enter in IGDB api information
+gem 'http'
+
 #Rspec install:
 group :development, :test do
   gem 'rspec-rails', '~> 6.0.0'
@@ -87,6 +93,7 @@ group :development, :test do
     gem 'factory_bot_rails'
   end 
   
+
 
 
 end

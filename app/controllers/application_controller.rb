@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::Base
+    #Modified ActionController for API instead of Base for API usage
+
     #configure_permitted_parameters: method runs before each Devise controller action.
     before_action :configure_permitted_parameters, if: :devise_controller?
  
