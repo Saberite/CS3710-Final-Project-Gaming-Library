@@ -3,22 +3,29 @@ class GamersController < ApplicationController
 
   # GET /gamers or /gamers.json
   def index
-    @gamers = Gamer.all
+    # Testing purposes: show all gamers 
+    #@gamers = Gamer.all
 
     @search_params = params[:search] || {}
     
-    #Intialize Students to be empty before search
-    #@gamers = Gamer.none
-
+    # Intialize Gamers to be empty for users, but available for admins
+    # Logic is from _search_form.html.erb
+      if current_gamer && current_gamer.admin?
+        @gamers = Gamer.all
+      elif current_gamer && current_gamer.gamer?
+        @gamers = Gamer.none
+      elsif current_gamer.nil?
+        @gamers = Gamer.none
+      end
+      
     #If search is present, hide all
     if params[:search].present?
       
       #When search is made, show gamer index according to filter
       @gamers = Gamer.all
 
-
      
-      # Search for games using API service
+      # Search for games using IGDB Database
       if @search_params[:game_search].present?
         #@games = IGDBService.new.search_games(@search_params[:game_search])
         @games = search_games_via_igdb(@search_params[:game_search])
@@ -100,6 +107,8 @@ class GamersController < ApplicationController
     end
 
     # Used for searching games
+    # Using IGDBService.new allows to search for games and will return results for games
+    # Tested in rails console, but some issues with displaying in application
     def search_games_via_igdb(query)
       igdb_service = IGDBService.new
       games = igdb_service.search_games(query)

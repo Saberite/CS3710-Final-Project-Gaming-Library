@@ -1,5 +1,23 @@
 <%= form_with(url: gamers_path, method: :get, local: true, class: "form-inline", id: "search-form") do |form| %>
   
+
+  <!-- The logic on this took way too long :( -->
+  <!-- The intention of this code below is meant for the Admin. If the Admin is signed in,
+  they have access to the search function for the username in the database for security reasons -->
+  <!-- If a non-admin/non-gamer(user) is on the page, then they have normal access to the IGDB search along 
+  with sign in/up -->
+  <!-- if a gamer(user) is on the page, then they have normal access to the IGDB search and sign out -->
+
+  
+  <% if current_gamer && current_gamer.admin? %>
+    <%= form.label :username, "Search Username" %>
+    <%= form.text_field :username, value: @search_params[:username], class: "form-control" %>
+  <% elsif current_gamer && current_gamer.gamer? %>
+    <p>Hi! Welcome to the Page!</p>
+  <% elsif current_gamer.nil? %>
+    <p>Hi! Welcome to the Page!</p>
+  <% end %>
+
   <%= form.label :game_search, "Search IGDB Games" %>
   <%= form.text_field :game_search, value: @search_params[:game_search], class: "form-control" %>
   

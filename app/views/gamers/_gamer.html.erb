@@ -1,5 +1,11 @@
 <div id="<%= dom_id gamer %>">
-  <p>
+  
+<% if current_gamer %>
+    <p>Hello <%= current_gamer.email %>!</p>
+    <p>You are a <%= current_gamer.role %></p>
+<% end %>
+
+<p>
     <strong>First name:</strong>
     <%= gamer.first_name %>
   </p>

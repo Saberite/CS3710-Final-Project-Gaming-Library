@@ -35,8 +35,6 @@
  }
   </style>
  
-
-
  <!-- Header Added with 'jumbotron' -->
  <!-- Header with background color green from # and text coloring with "color" -->
  <div class="jumbotron" style="background-color: #4CAF50; color: white;">
@@ -88,51 +86,51 @@
                     <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
                         <span class="d-none d-sm-inline mx-1">Gamer</span>
                     </a>
+                    
+                    <!-- Start of sign/in/up/buttons on profile -->
                     <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                        <li><a class="dropdown-item" "new_gamer_session_path">Sign In</a></li>
-                        <li><a class="dropdown-item" "destroy_gamer_session_path">Sign Out</a></li>
+                        <%= link_to 'Sign In', new_gamer_session_path, class: "btn btn-primary" %>
+                        <%= link_to 'Sign Up', new_gamer_registration_path, class: "btn btn-success" %>
                         <li><a class="dropdown-item" href="#">Profile</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
                         <li><a class="dropdown-item" href="#">Sign out</a></li>
                     </ul>
+
+                    
                 </div>
             </div>
         </div>
+        <div class="col py-3">
+        
+        <!-- Sign up/in/out button -->
+        <% if gamer_signed_in? %>
+        <%= button_to "Sign Out", destroy_gamer_session_path, method: :delete, class: "btn btn-danger" %>
+        <% else %>
+        <%= link_to 'Sign In', new_gamer_session_path, class: "btn btn-primary" %>
+        <%= link_to 'Sign Up', new_gamer_registration_path, class: "btn btn-success" %>
+        <% end %>
+
+
+        
+        <!--Test Dropdown  -->
+        <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dropdown button
+            </button>
+            <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="https://www.msudenver.edu/">MSU Home Page</a></li>
+            <li><a class="dropdown-item" href="https://www.msudenver.edu/studenthub/">MSU Student Hub</a></li>
+            <li><a class="dropdown-item" href="gamers#new">New Student?</a></li>
+            </ul>
+        </div>
+        <%= yield %>
     </div>
 </div>
 
 <!-- end of side bar. Needs to left of everything! FIX -->
 
-<!-- Sign up/in/out button -->
-<% if gamer_signed_in? %>
-  <%= button_to "Sign Out", destroy_gamer_session_path, method: :delete, class: "btn btn-danger" %>
-<% else %>
-  <%= link_to 'Sign In', new_gamer_session_path, class: "btn btn-primary" %>
-  <%= link_to 'Sign Up', new_gamer_registration_path, class: "btn btn-success" %>
-<% end %>
 
-
- <body>
-<!--Test Dropdown  -->
-   <div class="dropdown">
-     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-       Dropdown button
-     </button>
-     <ul class="dropdown-menu">
-       <li><a class="dropdown-item" href="https://www.msudenver.edu/">MSU Home Page</a></li>
-       <li><a class="dropdown-item" href="https://www.msudenver.edu/studenthub/">MSU Student Hub</a></li>
-       <li><a class="dropdown-item" href="gamers#new">New Student?</a></li>
-     </ul>
-   </div>
-   <%= yield %>
-
-  
  
-
-
-
-
- </body>
 </html>

@@ -5,6 +5,20 @@ class Gamer < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
 
+
+    # Roles set up for admin and user
+    enum role: { gamer: 0, admin: 1 }
+
+    # When a user is created, they are assigned the role of gamer(user)
+    after_initialize :set_default_role, :if => :new_record?
+    def set_default_role
+        self.role ||= :gamer
+    end
+    # There is one admin created and set. 
+    # Username: admin, Email: admin@email.com, Password: Password
+    # Admin Role has access to everyone
+    # User has access to only account
+
     #Each gamer have one library. If the gamer is destroyed, library also gets deleted 
     has_one :library, dependent: :destroy
     #After gamer is made, create a library tied to that gamer
