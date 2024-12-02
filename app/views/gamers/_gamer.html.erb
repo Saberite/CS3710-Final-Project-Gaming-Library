@@ -1,5 +1,7 @@
 <div id="<%= dom_id gamer %>">
   
+<!-- Checking for role and email tied to account. The Roles are set to gamer and admin -->
+<!-- Info thanks to this video https://www.youtube.com/watch?v=DYE6CB7nzcE -->
 <% if current_gamer %>
     <p>Hello <%= current_gamer.email %>!</p>
     <p>You are a <%= current_gamer.role %></p>
@@ -26,12 +28,12 @@
   </p>
 
   
-  
+  <!-- Render the gamer profile. Renders all profiles if admin -->
   <% if gamer_signed_in? %>
   <h2>Your Library Info </h2>
-    <% if @gamer.library %>
-    <p><strong>Game Names:</strong> <%= @gamer.library.game_name %></p>
-    <p><strong>Game Descriptions:</strong> <%= @gamer.library.game_desc %></p>
+    <% if gamer.library %>
+    <p><strong>Game Names:</strong> <%= gamer.library.game_name %></p>
+    <p><strong>Game Descriptions:</strong> <%= gamer.library.game_desc %></p>
   <% else %>
     <p>No game information available.</p>
   <% end %>

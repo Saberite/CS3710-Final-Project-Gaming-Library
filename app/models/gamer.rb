@@ -10,6 +10,7 @@ class Gamer < ApplicationRecord
     enum role: { gamer: 0, admin: 1 }
 
     # When a user is created, they are assigned the role of gamer(user)
+    # Information for roles are thanks to https://www.youtube.com/watch?v=DYE6CB7nzcE
     after_initialize :set_default_role, :if => :new_record?
     def set_default_role
         self.role ||= :gamer

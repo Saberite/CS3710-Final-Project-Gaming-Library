@@ -1,3 +1,10 @@
+# File needed to connect to IGDB api
+# ChatGPT was used to help with file structure along with the documents listed below
+# Token/Client Id/Client secret are mine!
+# Document: https://api-docs.igdb.com/#getting-started
+
+# Intially tried the gem wrapper ruby-apicalypse, but documentation is poor and not updated(?)
+
 require 'http'
 
 class IGDBService

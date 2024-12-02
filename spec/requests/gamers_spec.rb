@@ -13,6 +13,8 @@ RSpec.describe "Gamers", type: :request do
       end
 
     end
+  end
+  
   
     # Rspec Testing for Model validations
     #describe "validations" do
@@ -28,6 +30,8 @@ RSpec.describe "Gamers", type: :request do
         expect(response.body).to_not include("The Legend of Zelda")
       end
 
+    end
+
     # Post for creation of gamer. Format is from Test #7 in Portfolio_app!
     describe "POST /gamers" do
       context "with valid parameters" do
@@ -36,10 +40,12 @@ RSpec.describe "Gamers", type: :request do
             post gamers_path, params: {gamer: {first_name: "FirstName", last_name: "LastName", favorite_genere: "Action", username: "Username"  }}
           }.to change(Gamer, :count). by(1)
 
-          expect(response).to have have_http_status(:found) # Should redirect after creating a gamer
+          expect(response).to have_http_status(:found) # Should redirect after creating a gamer
           follow_redirect!
-          expect(reponse.body).to include("FirstName", "LastName") # Checks to see if page will have first_name and last)name
+          expect(response.body).to include("FirstName", "LastName") # Checks to see if page will have first_name and last)name
         end
+      end
+    
 
     # Testing validations for Gamer model
     context "invaild parameter for Gamer" do
@@ -52,6 +58,8 @@ RSpec.describe "Gamers", type: :request do
       expect(response).to have http_status(:unprocessed_entity)
       end
     end
+
+  end
 
 
     # Testing for Devise Sign Up
