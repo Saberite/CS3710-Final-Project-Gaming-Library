@@ -6,9 +6,10 @@
 # Intially tried the gem wrapper ruby-apicalypse, but documentation is poor and not updated(?)
 
 require 'http'
+# require 'ostruct'
 
 class IGDBService
-  API_URL = 'https://api.igdb.com/v4/games'
+  API_URL = 'https://api.igdb.com/v4'
 
   def initialize
     @client_id = 'g75eiml370xtj2f8fjywyruvbmnfpg'
@@ -30,6 +31,7 @@ class IGDBService
       'Client-ID': @client_id,
       'Authorization': "Bearer #{@token}"
     }).post("#{API_URL}/games", body: "search \"#{query}\"; fields name, summary, genres, platforms;")
+    # OpenStruct.new(hash)
 
     # If IGDB API fails to work, rise a response in log
     if response.status.success?

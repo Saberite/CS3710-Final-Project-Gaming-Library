@@ -35,7 +35,7 @@ class GamersController < ApplicationController
       #When search is made, show gamer index according to filter
       @gamers = Gamer.all
 
-     
+      # Furthering testing will be needed! Refered to team mates, and should make a change from reading api data to mapping api data to my view(?)
       # Search for games using IGDB Database
       if @search_params[:game_search].present?
         @games = search_games(@search_params[:game_search])

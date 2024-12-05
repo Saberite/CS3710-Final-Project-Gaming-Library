@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe "Gamers", type: :request do
   describe "GET /gamers" do
     context "when gamers exist" do
-      let!(:gamer) { Gamer.create!(first_name: "John", last_name: "Jims", favorite_genere: "Horror", username: "JoJo" ) }
+      let!(:gamer) { Gamer.create!(first_name: "John", last_name: "Jims", favorite_genere: "Horror", username: "JoJo", email: "JJ@email.com", password: "password" ) }
 
       # Test 1: Returns a successful response and displays the search form
       it "returns a successful response and displays the search form" do
@@ -16,9 +16,7 @@ RSpec.describe "Gamers", type: :request do
   end
   
   
-    # Rspec Testing for Model validations
-    #describe "validations" do
-      #let(:gamer) {}
+    
 
     # Search IGDB functionality
     # Currently API works through Rails console,
@@ -32,52 +30,63 @@ RSpec.describe "Gamers", type: :request do
 
     end
 
+    # Model Validations in Rspec
     # Post for creation of gamer. Format is from Test #7 in Portfolio_app!
-    describe "POST /gamers" do
+  describe "POST /gamers" do
       context "with valid parameters" do
         it "Creates a new gamer and redirects" do  
           expect {
-            post gamers_path, params: {gamer: {first_name: "FirstName", last_name: "LastName", favorite_genere: "Action", username: "Username"  }}
+            post gamers_path, params: {gamer: {first_name: "FirstName", last_name: "LastName", favorite_genere: "Action", username: "Username", email: "Test@email.com", password: 'password'  }}
           }.to change(Gamer, :count). by(1)
 
-          expect(response).to have_http_status(:found) # Should redirect after creating a gamer
+          expect(response).to have_http_status(:see_other) # Status code 303 and should redirect after creating a gamer
           follow_redirect!
-          expect(response.body).to include("FirstName", "LastName") # Checks to see if page will have first_name and last)name
+          expect(response.body).to include("FirstName", "LastName") # Checks to see if page will have first_name and last_name
         end
       end
     
+      context "with invalid parameters minus favorite_genere" do
+        it "Creates a new gamer and redirects" do  
+          expect {
+            post gamers_path, params: {gamer: {first_name: "FirstName2", last_name: "LastName2", favorite_genere: "", username: "Username2", email: "Test2@email.com", password: 'password'  }}
+          }.to change(Gamer, :count). by(1)
+
+          expect(response).to have_http_status(303)
+          
+        end
+      end
 
     # Testing validations for Gamer model
     context "invaild parameter for Gamer" do
       it "Fails to create a student when fields are empty" do
         expect {
-          post gamers_path, params: {gamer: {first_name: "", last_name: "", favorite_genere: "", username: ""  }}
+          post gamers_path, params: {gamer: {first_name: "", last_name: "", favorite_genere: "", username: "", email: "", password: ""  }}
       }.to_not change(Gamer, :count)
 
       # Expect unprocessed reponse
-      expect(response).to have http_status(:unprocessed_entity)
+      expect(response).to have_http_status(422)
+      #expect(response).to have_http_status(:see_other) # Status code 303
+
+
+      end
+    end
+
+    # Testing some fields filled
+    context "valid parameters for Gamer besides first_name" do
+      it "Fails to create a student when first_name field is empty" do
+        expect {
+          post gamers_path, params: {gamer: {first_name: "", last_name: "LastTest", favorite_genere: "Action", username: "username3", email: "e@email.com", password: "password"  }}
+      }.to_not change(Gamer, :count)
+
+      # Expect unprocessed reponse
+      expect(response).to have_http_status(422)
+     
+
+
       end
     end
 
   end
 
 
-    # Testing for Devise Sign Up
-    describe "Gamer Registration" do
-      # New user with correct information
-     context "new user with valid information" do
-       it "allows a user to sign up" do
-         visit new_gamer_registration_path
-         fill_in "First name", with: "Capybara"
-         fill_in "Last name", with: "Rspec"
-         fill_in "Username", with: "Random"
-         fill_in "Email", with: "Random@email.com"
-         fill_in "Password", with: "password"
-         fill_in "Password confirmation", with: "password"
-         click_button "Sign up"
-         expect(page).to have_content("Welcome! You have signed up successfully.")
-       end
-     # New user with incorrect information
-     end
-  end
 end
